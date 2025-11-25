@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Close from "@/assets/close.icon.svg";
+import Image from "next/image";
 import { CiPlay1 } from "react-icons/ci";
 
 export default function VideoUploader({
@@ -56,7 +56,13 @@ export default function VideoUploader({
               className="absolute top-5 right-5 p-2 bg-white/80 rounded-full hover:bg-white transition-colors"
               onClick={handleDeleteVideo}
             >
-              <Close className="w-6" />
+              <Image
+                src="/assets/close.svg"
+                alt="닫기"
+                width={24}
+                height={24}
+                className="w-6 h-6"
+              />
             </button>
             <div
               className="bg-black/50 p-4 rounded-full border border-sub3"

@@ -23,8 +23,6 @@ import { LinkPastePreview } from "@/lib/tiptap/extensions/LinkPastePreview";
 import ToolBar from "../Organisms/ToolBar";
 import { useRouter } from "next/navigation";
 import VideoUploader from "../Organisms/VideoUploader";
-// import CheckCircle from "public/assets/post/check_circle.icon.icon.svg";
-// import UnCheckCircle from "public/assets/brightness_1.icon.icon.svg";
 import HashtagEditor from "../Organisms/HashTag";
 
 import { openModal } from "@/redux/slices/modalSlice";
@@ -147,7 +145,7 @@ export default function EditorTemplate() {
       LinkPastePreview,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
-    content: "<p>여기에 내용을 입력하세요.</p>",
+    content: `<p style="height: 100%;">여기에 내용을 입력하세요.</p>`,
     immediatelyRender: false,
   });
 
@@ -274,7 +272,7 @@ export default function EditorTemplate() {
     return combinedDate.toISOString(); // UTC 기준 ISO 문자열 반환
   };
 
-  const onSavePost = async (isDraft: boolean, isAutoSave?: boolean) => {
+  const onSavePost = async () => {
     if (!editor || isUploading) return;
 
     const editorContent = extractEditorContentFromDoc(editor);
@@ -376,7 +374,7 @@ export default function EditorTemplate() {
 
   return (
     <div className="w-full flex justify-center min-h-screen">
-      <div className="w-full max-w-5xl px-4 desktop:px-0">
+      <div className="w-full max-w-5xl px-4 desktop:px-0 flex flex-col">
         {isUploading && (
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
             <div className="bg-white rounded-2xl px-8 py-6 shadow-default">
@@ -398,21 +396,23 @@ export default function EditorTemplate() {
 
         <EditorContent
           editor={editor}
-          className="flex-1 py-5 outline-none relative z-10 mt-3"
+          className="grow py-5 outline-none relative z-10 mt-3"
+          spellCheck={false}
         />
 
         <HashtagEditor hashtags={hashtags} setHashtags={setHashtags} />
 
-        <div className="flex justify-end pt-6 border-t border-black/10 mt-8">
+        <div className="flex justify-end pt-6 border-t border-black/10 mt-8 mb-6">
           <button
             className={[
-              "w-full desktop:w-[320px] h-11 desktop:h-14",
+              "inline-flex items-center justify-center",
+              "w-full desktop:w-[200px] h-11",
               "rounded-full bg-main text-white",
-              "text-sm desktop:text-base font-semibold",
-              "shadow-default hover:shadow-lg hover:-translate-y-[1px]",
-              "transition-all disabled:opacity-60 disabled:hover:translate-y-0",
+              "desktop:text-[15px] font-semibold",
+              "shadow-default hover:shadow-md hover:-translate-y-0.5",
+              "transition-all disabled:opacity-60 disabled:hover:translate-y-0 ",
             ].join(" ")}
-            onClick={() => onSavePost(false)}
+            onClick={onSavePost}
             disabled={isUploading}
           >
             저장하기

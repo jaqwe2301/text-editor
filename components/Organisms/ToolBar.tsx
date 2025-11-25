@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
 import { Editor } from "@tiptap/core";
@@ -7,10 +8,7 @@ import { StyleDescriptor, FontFamily } from "@/types/editor";
 import TextStyleToolbar from "../Modules/TextStyleToolbar";
 import AlignToolbar from "../Modules/AlignToolbar";
 import InsertToolbar from "../Modules/InsertToolbar";
-import VerticalBar from "../Atoms/VerticalBar";
 import FontDropdown from "../Modules/FontDropdown";
-
-import PlayArrowIcon from "@/assets/play_arrow.icon.svg";
 
 interface Props {
   editor: Editor | null;
@@ -32,7 +30,6 @@ export default function ToolBar({ editor, insertImage }: Props) {
   const fontSizeBtnRef = useRef<HTMLButtonElement>(null);
   const fontSelectContainerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const placeBtnRef = useRef<HTMLButtonElement>(null);
   const toolbarContainerRef = useRef<HTMLDivElement>(null);
 
   const [isDragging, setIsDragging] = useState(false);
@@ -259,44 +256,6 @@ export default function ToolBar({ editor, insertImage }: Props) {
     return wrappingElements.reverse(); // 안쪽부터 바깥쪽 순서로
   };
 
-  /**
-   * 기존 스타일을 유지하면서 텍스트를 감싸는 span 요소를 생성합니다.
-   * 기존에 적용된 태그들도 함께 복사하여 새로운 span에 추가합니다.
-   *
-   * @param text - 새로 추가할 텍스트
-   * @param textNode - 원래의 텍스트 노드
-   * @param originalSpan - 원래의 span 요소
-   * @returns 새로 생성된 span 요소
-   */
-  const createWrappedSpan = (
-    text: string,
-    textNode: Text,
-    originalSpan: HTMLElement
-  ) => {
-    const newText = document.createTextNode(text);
-    const newSpan = document.createElement("span");
-    const allTags: HTMLElement[] = [];
-
-    const existingTags = getTagElements(textNode, originalSpan);
-    allTags.push(
-      ...existingTags.map((tag) => tag.cloneNode(false) as HTMLElement)
-    );
-
-    // 기존 스타일 복사
-    newSpan.style.cssText = originalSpan.style.cssText;
-
-    // 기존 클래스 복사
-    newSpan.className = originalSpan.className;
-
-    const wrappedNode = allTags.reduceRight<Node>((child, el) => {
-      el.appendChild(child);
-      return el;
-    }, newText);
-    newSpan.appendChild(wrappedNode);
-
-    return newSpan;
-  };
-
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
     setStartX(e.clientX);
@@ -357,8 +316,13 @@ export default function ToolBar({ editor, insertImage }: Props) {
               <span className="text-sm desktop:text-base font-medium">
                 {selectedFontFamily.label}
               </span>
-              <PlayArrowIcon
+              <Image
+                src="/assets/play_arrow.svg"
+                alt="열기"
+                width={16}
+                height={16}
                 className={[
+                  "w-4 h-4 desktop:w-5 desktop:h-5",
                   "transition-transform duration-150",
                   fontStatus === "fontFamily" ? "rotate-180" : "",
                 ].join(" ")}
@@ -373,10 +337,15 @@ export default function ToolBar({ editor, insertImage }: Props) {
               <span className="text-sm desktop:text-base font-medium">
                 {selectedFontSize}px
               </span>
-              <PlayArrowIcon
+              <Image
+                src="/assets/play_arrow.svg"
+                alt="열기"
+                width={16}
+                height={16}
                 className={[
+                  "w-4 h-4 desktop:w-5 desktop:h-5",
                   "transition-transform duration-150",
-                  fontStatus === "fontSize" ? "rotate-180" : "",
+                  fontStatus === "fontFamily" ? "rotate-180" : "",
                 ].join(" ")}
               />
             </button>
@@ -387,7 +356,6 @@ export default function ToolBar({ editor, insertImage }: Props) {
         </div>
       </div>
 
-      {/* ✅ 드롭다운: 데스크탑/모바일 공통 */}
       <FontDropdown
         dropdownRef={dropdownRef}
         style={dropdownStyle}

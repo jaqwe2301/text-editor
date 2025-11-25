@@ -1,15 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 import ColorPicker from "./ColorPicker";
 import VerticalBar from "@/components/Atoms/VerticalBar";
 
-import BoldIcon from "@/assets/format_bold.icon.svg";
-import ItalicIcon from "@/assets/format_italic.icon.svg";
-import UnderlineIcon from "@/assets/format_underlined.icon.svg";
-import StrikethroughIcon from "@/assets/format_strikethrough.icon.svg";
-import ColorTextIcon from "@/assets/format_color_text.icon.svg";
 import { Editor } from "@tiptap/core";
 
 export default function TextStyleToolbar({
@@ -28,22 +24,54 @@ export default function TextStyleToolbar({
   }[] = [
     {
       label: "굵게",
-      icon: <BoldIcon className="w-6 desktop:w-10" />,
+      icon: (
+        <Image
+          src="/assets/format_bold.svg"
+          alt="굵게"
+          className="w-6 desktop:w-8"
+          width={32}
+          height={32}
+        />
+      ),
       onClick: () => editor.chain().focus().toggleBold().run(),
     },
     {
       label: "이텔릭",
-      icon: <ItalicIcon className="w-6 desktop:w-10" />,
+      icon: (
+        <Image
+          src="/assets/format_italic.svg"
+          alt="이텔릭"
+          className="w-6 desktop:w-8"
+          width={32}
+          height={32}
+        />
+      ),
       onClick: () => editor.chain().focus().toggleItalic().run(),
     },
     {
       label: "밑줄",
-      icon: <UnderlineIcon className="w-6 desktop:w-10" />,
+      icon: (
+        <Image
+          src="/assets/format_underlined.svg"
+          alt="밑줄"
+          className="w-6 desktop:w-8"
+          width={32}
+          height={32}
+        />
+      ),
       onClick: () => editor.chain().focus().toggleUnderline().run(),
     },
     {
       label: "취소선",
-      icon: <StrikethroughIcon className="w-6 desktop:w-10" />,
+      icon: (
+        <Image
+          src="/assets/format_strikethrough.svg"
+          alt="취소선"
+          className="w-6 desktop:w-8"
+          width={32}
+          height={32}
+        />
+      ),
       onClick: () => editor.chain().focus().toggleStrike().run(),
     },
   ];
@@ -58,7 +86,13 @@ export default function TextStyleToolbar({
       <VerticalBar />
       <div className="cursor-pointer relative">
         <button onClick={() => setIsPickerOpen((prev) => !prev)}>
-          <ColorTextIcon className="w-6 desktop:w-10" />
+          <Image
+            src="/assets/format_color_text.svg"
+            alt="텍스트 색상"
+            className="w-6 desktop:w-8"
+            width={32}
+            height={32}
+          />
         </button>
         {isPickerOpen && (
           <ColorPicker

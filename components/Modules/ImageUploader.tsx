@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import AddPhoto from "@/assets/add_photo_alternate.icon.svg";
+import Image from "next/image";
 
 interface ImageUploaderProps {
   insertImage: (imageUrl: string) => void;
@@ -24,7 +24,14 @@ export default function ImageUploader({ insertImage }: ImageUploaderProps) {
 
   return (
     <button onClick={() => fileInputRef.current?.click()}>
-      <AddPhoto className="fill-black w-6 desktop:w-10" />
+      <Image
+        src="/assets/add_photo_alternate.svg"
+        alt="add_photo"
+        className="fill-black w-6 desktop:w-8"
+        width={32}
+        height={32}
+      />
+      {/* <AddPhoto className="fill-black w-6 desktop:w-8" /> */}
       <input
         type="file"
         ref={fileInputRef}
