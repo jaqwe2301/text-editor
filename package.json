@@ -9,11 +9,23 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.10.1",
+    "@tiptap/core": "^3.10.7",
+    "@tiptap/extension-color": "^3.11.0",
+    "@tiptap/extension-text-align": "^3.10.8",
+    "@tiptap/extension-text-style": "^3.11.0",
+    "@tiptap/extension-underline": "^3.11.0",
+    "@tiptap/react": "^3.10.8",
+    "@tiptap/starter-kit": "^3.10.8",
     "next": "16.0.3",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "react-icons": "^5.5.0",
+    "react-redux": "^9.2.0",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
