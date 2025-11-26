@@ -27,11 +27,10 @@ export default function ImageUploader({ insertImage }: ImageUploaderProps) {
       <Image
         src="/assets/add_photo_alternate.svg"
         alt="add_photo"
-        className="fill-black w-6 desktop:w-8"
+        className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
         width={32}
         height={32}
       />
-      {/* <AddPhoto className="fill-black w-6 desktop:w-8" /> */}
       <input
         type="file"
         ref={fileInputRef}

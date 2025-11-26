@@ -16,7 +16,7 @@ const alignments: {
       <Image
         src="/assets/format_align_justify.svg"
         alt="양쪽 정렬"
-        className="w-6 desktop:w-8"
+        className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
         width={32}
         height={32}
       />
@@ -29,7 +29,7 @@ const alignments: {
       <Image
         src="/assets/format_align_left.svg"
         alt="왼쪽 정렬"
-        className="w-6 desktop:w-8"
+        className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
         width={32}
         height={32}
       />
@@ -42,7 +42,7 @@ const alignments: {
       <Image
         src="/assets/format_align_center.svg"
         alt="가운데 정렬"
-        className="w-6 desktop:w-8"
+        className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
         width={32}
         height={32}
       />
@@ -55,7 +55,7 @@ const alignments: {
       <Image
         src="/assets/format_align_right.svg"
         alt="오른쪽 정렬"
-        className="w-6 desktop:w-8"
+        className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
         width={32}
         height={32}
       />

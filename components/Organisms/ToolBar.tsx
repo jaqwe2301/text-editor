@@ -3,12 +3,13 @@ import { useState, useEffect, useRef } from "react";
 
 import { Editor } from "@tiptap/core";
 import { useWindowWidth } from "@/lib/hook/useWindowWidth";
-import { StyleDescriptor, FontFamily } from "@/types/editor";
+import { FontFamily } from "@/types/editor";
 
 import TextStyleToolbar from "../Modules/TextStyleToolbar";
 import AlignToolbar from "../Modules/AlignToolbar";
 import InsertToolbar from "../Modules/InsertToolbar";
 import FontDropdown from "../Modules/FontDropdown";
+import ImageUploader from "../Modules/ImageUploader";
 
 interface Props {
   editor: Editor | null;
@@ -190,72 +191,6 @@ export default function ToolBar({ editor, insertImage }: Props) {
     setFontStatus(null);
   };
 
-  /** 가장 깊숙한 텍스트 노드를 반환 */
-  const getDeepestTextNode = (element: Node): Text | null => {
-    if (element.nodeType === Node.TEXT_NODE) {
-      return element as Text; // 텍스트 노드인 경우 반환
-    }
-
-    return element.hasChildNodes()
-      ? getDeepestTextNode(element.firstChild as Node) // 재귀적으로 가장 안쪽 자식 탐색
-      : null;
-  };
-
-  /**
-   * 주어진 텍스트 노드에 특정 스타일이 적용되어 있는지 확인합니다.
-   * 스타일은 태그 이름(tagName) 또는 인라인 스타일(inlineStyles)로 지정할 수 있습니다.
-   *
-   * @param textNode - 확인할 텍스트 노드
-   * @param style - 적용된 스타일 정보
-   * @returns 해당 스타일이 적용되어 있으면 true, 아니면 false
-   */
-  function hasStyleApplied(textNode: Text, style: StyleDescriptor): boolean {
-    let current: Node | null = textNode;
-
-    while (current) {
-      if (current instanceof HTMLElement) {
-        if (
-          style.type === "tag" &&
-          current.tagName.toLowerCase() === style.tagName
-        ) {
-          return true;
-        }
-        if (
-          style.type === "inline" &&
-          current.style[style.key] === style.value
-        ) {
-          return true;
-        }
-      }
-      current = current.parentElement;
-    }
-
-    return false;
-  }
-
-  /**
-   * 적용되어 있는 태그 요소를 반환
-   */
-  const getTagElements = (
-    textNode: Text,
-    boundaryElement: HTMLElement
-  ): HTMLElement[] => {
-    const wrappingElements: HTMLElement[] = [];
-
-    let current: Node | null = textNode.parentNode;
-
-    while (
-      current &&
-      current instanceof HTMLElement &&
-      current !== boundaryElement
-    ) {
-      wrappingElements.push(current);
-      current = current.parentElement;
-    }
-
-    return wrappingElements.reverse(); // 안쪽부터 바깥쪽 순서로
-  };
-
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
     setStartX(e.clientX);
@@ -302,7 +237,7 @@ export default function ToolBar({ editor, insertImage }: Props) {
             "select-none",
           ].join(" ")}
         >
-          <InsertToolbar insertImage={insertImage} />
+          <ImageUploader insertImage={insertImage} />
 
           <div
             ref={fontSelectContainerRef}

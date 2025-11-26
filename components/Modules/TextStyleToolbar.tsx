@@ -28,7 +28,7 @@ export default function TextStyleToolbar({
         <Image
           src="/assets/format_bold.svg"
           alt="굵게"
-          className="w-6 desktop:w-8"
+          className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
           width={32}
           height={32}
         />
@@ -41,7 +41,7 @@ export default function TextStyleToolbar({
         <Image
           src="/assets/format_italic.svg"
           alt="이텔릭"
-          className="w-6 desktop:w-8"
+          className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
           width={32}
           height={32}
         />
@@ -54,7 +54,7 @@ export default function TextStyleToolbar({
         <Image
           src="/assets/format_underlined.svg"
           alt="밑줄"
-          className="w-6 desktop:w-8"
+          className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
           width={32}
           height={32}
         />
@@ -67,7 +67,7 @@ export default function TextStyleToolbar({
         <Image
           src="/assets/format_strikethrough.svg"
           alt="취소선"
-          className="w-6 desktop:w-8"
+          className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
           width={32}
           height={32}
         />
@@ -89,7 +89,7 @@ export default function TextStyleToolbar({
           <Image
             src="/assets/format_color_text.svg"
             alt="텍스트 색상"
-            className="w-6 desktop:w-8"
+            className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
             width={32}
             height={32}
           />
