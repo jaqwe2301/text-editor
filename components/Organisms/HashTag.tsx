@@ -41,6 +41,14 @@ export default function HashtagEditor({
 
   const handleTagUpdate = (index: number) => {
     const hashtag = newHashtag.trim();
+
+    if (!hashtag) {
+      setHashtags((prev) => prev.filter((_, i) => i !== index));
+      setHashtagEditingIndex(null);
+      setNewHashtag("");
+      return;
+    }
+
     const duplicateHashTagIndex = hashtags.indexOf(hashtag);
     if (index === duplicateHashTagIndex) {
       setHashtagEditingIndex(null);
@@ -49,6 +57,7 @@ export default function HashtagEditor({
     }
     const updated = [...hashtags];
     updated[index] = hashtag;
+
     // 기존 해시태그와 중복되는지 확인
     if (duplicateHashTagIndex !== -1) {
       setHashtags((prev) =>
