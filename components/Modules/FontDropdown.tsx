@@ -40,7 +40,7 @@ export default function FontDropdown({
         "animate-in fade-in zoom-in-95 duration-150",
         isMobile
           ? "desktop:hidden fixed top-full right-0 mt-2 w-[180px] max-h-[45vh] overflow-auto p-2"
-          : "mobile:hidden absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-[260px] max-h-[360px] overflow-auto p-2",
+          : "mobile:hidden absolute top-[calc(100%+8px)] left-[60px] w-[260px] max-h-[360px] overflow-auto p-2",
       ].join(" ")}
       ref={dropdownRef}
       style={positionStyle}
