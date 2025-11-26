@@ -1,5 +1,4 @@
 import "./globals.css";
-import { Noto_Sans_KR, Nanum_Gothic } from "next/font/google";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Providers } from "./Providers";
@@ -16,16 +15,36 @@ const pretendard = localFont({
   variable: "--font-pretendard",
 });
 
-const notoSansKr = Noto_Sans_KR({
-  weight: ["400", "700"],
-  subsets: ["latin"],
+const notoSansKr = localFont({
+  src: [
+    {
+      path: "../utils/fonts/NotoSansKR-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../utils/fonts/NotoSansKR-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   display: "swap",
   variable: "--font-noto-sans-kr",
 });
 
-const nanumGothic = Nanum_Gothic({
-  weight: ["400", "700"],
-  subsets: ["latin"],
+const nanumGothic = localFont({
+  src: [
+    {
+      path: "../utils/fonts/NanumGothic-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../utils/fonts/NanumGothic-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   display: "swap",
   variable: "--font-nanum-gothic",
 });

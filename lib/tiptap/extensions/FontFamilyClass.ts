@@ -2,46 +2,56 @@ import { Mark, mergeAttributes, CommandProps } from "@tiptap/core";
 
 const FONT_PREFIX = "font-";
 
-// 기존 클래스에서 폰트 패밀리 관련 클래스만 모두 제거
-function cleanFontClass(className: string) {
-  if (!className) return "";
-  return className
-    .split(" ")
-    .filter((c) => !c.startsWith(FONT_PREFIX))
-    .join(" ");
-}
-
 export const FontFamilyClass = Mark.create({
   name: "fontFamilyClass",
+
   addAttributes() {
     return {
-      class: {
+      fontFamilyClass: {
         default: null,
-        parseHTML: (element) => element.getAttribute("class"),
+
+        // HTML -> ProseMirror 로 파싱할 때
+        parseHTML: (element) => {
+          const className = element.getAttribute("class") ?? "";
+          const fontClass =
+            className.split(" ").find((c) => c.startsWith(FONT_PREFIX)) ?? null;
+
+          return fontClass;
+        },
+
+        // ProseMirror -> DOM 으로 렌더할 때
         renderHTML: (attributes) => {
-          if (!attributes.class) return {};
-          return { class: attributes.class };
+          if (!attributes.fontFamilyClass) return {};
+          return {
+            class: attributes.fontFamilyClass,
+          };
         },
       },
     };
   },
+
+  // 어떤 DOM을 이 마크로 인식할지
   parseHTML() {
-    return [{ tag: "span[class]" }];
+    return [{ tag: 'span[class*="font-"]' }];
   },
+
+  // 마크가 DOM으로 나갈 때의 기본 형태
   renderHTML({ HTMLAttributes }) {
     return ["span", mergeAttributes(HTMLAttributes), 0];
   },
+
   addCommands() {
     return {
       setFontFamilyClass:
         (className: string) =>
-        ({ commands, editor }: CommandProps) => {
-          const current = editor.getAttributes("fontFamilyClass").class || "";
-          const nextClass = [cleanFontClass(current), className || ""]
-            .filter(Boolean)
-            .join(" ")
-            .trim();
-          return commands.setMark(this.name, { class: nextClass });
+        ({ commands }: CommandProps) => {
+          // 같은 값이면 굳이 다시 세팅 안 해도 되지만,
+          // 여기서는 그냥 덮어쓰는 방식으로 간단하게.
+          const next = className || null;
+
+          return commands.setMark(this.name, {
+            fontFamilyClass: next,
+          });
         },
     };
   },

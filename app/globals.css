@@ -3,9 +3,9 @@
 @theme {
   --color-main: #2563eb;
 
-  --font-pretendard: var(--font-pretendard);
-  --font-noto-sans-kr: var(--font-noto-sans-kr);
-  --font-nanum-gothic: var(--font-nanum-gothic);
+  --font-pretendard: var(--font-pretendard-var);
+  --font-noto-sans-kr: var(--font-noto-sans-kr-var);
+  --font-nanum-gothic: var(--font-nanum-gothic-var);
 
   --breakpoint-desktop: 56.25rem; /* 900px / 16 */
 }

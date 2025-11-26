@@ -373,7 +373,7 @@ export default function EditorTemplate() {
   };
 
   return (
-    <div className="w-full flex justify-center min-h-screen">
+    <div className="w-full flex justify-center min-h-screen pt-2">
       <div className="w-full max-w-5xl px-4 desktop:px-0 flex flex-col">
         {isUploading && (
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
