@@ -7,7 +7,7 @@ export const BlockDropGuard = Extension.create({
     return [
       new Plugin({
         props: {
-          handleDrop: (view, event, slice, moved) => {
+          handleDrop: (view, event, slice) => {
             const coords = view.posAtCoords({
               left: event.clientX,
               top: event.clientY,

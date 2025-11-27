@@ -7,7 +7,6 @@ import { FontFamily } from "@/types/editor";
 
 import TextStyleToolbar from "../Modules/TextStyleToolbar";
 import AlignToolbar from "../Modules/AlignToolbar";
-import InsertToolbar from "../Modules/InsertToolbar";
 import FontDropdown from "../Modules/FontDropdown";
 import ImageUploader from "../Modules/ImageUploader";
 
@@ -244,7 +243,7 @@ export default function ToolBar({ editor, insertImage }: Props) {
           ].join(" ")}
         >
           <div className="flex items-center gap-1 desktop:gap-2 shrink-0">
-          <ImageUploader insertImage={insertImage} />
+            <ImageUploader insertImage={insertImage} />
           </div>
 
           <div
@@ -311,10 +310,10 @@ export default function ToolBar({ editor, insertImage }: Props) {
           </div>
 
           <div className="flex items-center gap-1 desktop:gap-2 shrink-0">
-          <TextStyleToolbar editor={editor} />
+            <TextStyleToolbar editor={editor} />
           </div>
           <div className="flex items-center gap-1 desktop:gap-2 shrink-0">
-          <AlignToolbar editor={editor} />
+            <AlignToolbar editor={editor} />
           </div>
         </div>
       </div>
