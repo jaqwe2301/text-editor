@@ -1,10 +1,10 @@
 # text-editor.bio ✏️  
 Tiptap + Next.js 기반 커스텀 리치 텍스트 에디터
 
-`text-editor.bio` 는 자기소개서, 포트폴리오, 블로그 포스트처럼 **“텍스트 구조를 보존하면서 스타일링”** 하기 좋은 웹 에디터입니다.  
+`text-editor.bio` 는 블로그 포스트처럼 **“텍스트 구조를 보존하면서 스타일링”** 하기 좋은 웹 에디터입니다.  
 Tiptap + Next.js 16 + Tailwind CSS 를 기반으로, 실제 서비스에 쓸 수 있는 수준의 툴바와 저장 로직을 구현했습니다.
 
-> 배포 도메인: **https://text-editor.bio** (예정)
+> 배포 도메인: **https://text-editor.bio**
 
 ---
 
@@ -26,7 +26,6 @@ Tiptap + Next.js 16 + Tailwind CSS 를 기반으로, 실제 서비스에 쓸 수
 ### 🖼 이미지 업로드 & 드래그
 
 - 상단 툴바의 **이미지 아이콘 클릭 → 로컬 파일 선택 → 에디터에 삽입**
-- **이미지 드래그 앤 드롭 삽입**
   - 에디터 위로 이미지 파일을 드래그 & 드롭하면 `FileReader` 로 `data URL` 변환 후 `insertImage` 실행
   - 이미 삽입된 이미지를 에디터 내에서 드래그해 위치만 옮길 수 있음  
     (`application/x-prosemirror-node` 타입 체크로 내부 드래그와 외부 파일 드롭을 구분)
@@ -44,12 +43,8 @@ Tiptap + Next.js 16 + Tailwind CSS 를 기반으로, 실제 서비스에 쓸 수
 
 ### 📱 반응형 툴바
 
-- **데스크톱**
-  - 넓은 툴바, 여유 있는 spacing, 큰 아이콘 사이즈
 - **모바일**
   - 툴바 전체 가로 스크롤
-  - 폰트 선택 pill 에 `shrink-0` / `whitespace-nowrap` 를 적용해 텍스트 줄바꿈 방지
-  - 아이콘 크기/간격 축소 (`text-xs`, 작은 gap)
 
 ### 💾 저장 로직 (예시)
 
@@ -67,20 +62,5 @@ Tiptap + Next.js 16 + Tailwind CSS 를 기반으로, 실제 서비스에 쓸 수
 
 - **Framework**: Next.js 16 (App Router, Turbopack)
 - **Language**: TypeScript
-- **Editor**: [Tiptap](https://tiptap.dev/)
-  - `StarterKit`, `Color`, `TextStyle`, `Underline`, `TextAlign`
-  - Custom: `FontSize`, `FontFamilyClass`, `CustomImage`, `LinkPreview`, `LinkPastePreview`, `MaxLength`, `BlockDropGuard`
-- **Styling**: Tailwind CSS (v4 스타일, `@import "tailwindcss"; @theme` 사용)
+- **Styling**: Tailwind CSS
 - **Fonts**: `next/font/local` 로 Pretendard, Noto Sans KR, Nanum Gothic 로컬 호스팅
-- **Icons**: `next/image` 로 SVG 아이콘 사용 (`/public/assets/*.svg`)
-
----
-
-## 🚀 시작하기
-
-### 1. 클론 & 설치
-
-```bash
-git clone https://github.com/your-username/text-editor.bio.git
-cd text-editor.bio
-npm install
