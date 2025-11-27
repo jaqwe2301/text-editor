@@ -89,7 +89,7 @@ export default function TextStyleToolbar({
           <Image
             src="/assets/format_color_text.svg"
             alt="텍스트 색상"
-            className="w-6 desktop:w-8 transition-all hover:opacity-60 group-hover:scale-105"
+            className="w-6 desktop:w-8"
             width={32}
             height={32}
           />

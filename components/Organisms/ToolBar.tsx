@@ -223,7 +223,13 @@ export default function ToolBar({ editor, insertImage }: Props) {
 
   return (
     <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-black/10">
-      <div className="flex items-center gap-2 desktop:gap-3 py-2 desktop:py-3 px-2 desktop:px-4">
+      <div
+        className={[
+          "flex items-center gap-2 desktop:gap-3",
+          "py-2 desktop:py-3 px-2 desktop:px-4",
+          "overflow-x-auto scrollbar-hide",
+        ].join(" ")}
+      >
         <div
           ref={toolbarContainerRef}
           onTouchMove={() => setFontStatus(null)}
@@ -233,20 +239,32 @@ export default function ToolBar({ editor, insertImage }: Props) {
           onMouseLeave={handleMouseLeave}
           className={[
             "flex items-center gap-2 desktop:gap-3 w-full",
-            "mobile:overflow-x-auto mobile:scrollbar-hide",
             "select-none",
+            "min-w-max",
           ].join(" ")}
         >
+          <div className="flex items-center gap-1 desktop:gap-2 shrink-0">
           <ImageUploader insertImage={insertImage} />
+          </div>
 
           <div
             ref={fontSelectContainerRef}
-            className="flex items-center gap-2 desktop:gap-3 px-2 py-1 rounded-full bg-black/5"
+            className={[
+              "flex items-center gap-1 desktop:gap-2",
+              "px-2 py-1 rounded-full bg-black/5",
+              "shrink-0 whitespace-nowrap",
+            ].join(" ")}
           >
             <button
               ref={fontFamilyBtnRef}
               onClick={() => onFontStatusBtn("fontFamily")}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white transition-colors"
+              className={[
+                "flex items-center gap-1 desktop:gap-2",
+                "px-2 desktop:px-3 py-1.5 rounded-full",
+                "hover:bg-white transition-colors",
+                "whitespace-nowrap",
+                "text-xs desktop:text-sm font-medium",
+              ].join(" ")}
             >
               <span className="text-sm desktop:text-base font-medium">
                 {selectedFontFamily.label}
@@ -267,7 +285,13 @@ export default function ToolBar({ editor, insertImage }: Props) {
             <button
               ref={fontSizeBtnRef}
               onClick={() => onFontStatusBtn("fontSize")}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white transition-colors"
+              className={[
+                "flex items-center gap-1 desktop:gap-2",
+                "px-2 desktop:px-3 py-1.5 rounded-full",
+                "hover:bg-white transition-colors",
+                "whitespace-nowrap",
+                "text-xs desktop:text-sm font-medium",
+              ].join(" ")}
             >
               <span className="text-sm desktop:text-base font-medium">
                 {selectedFontSize}px
@@ -286,8 +310,12 @@ export default function ToolBar({ editor, insertImage }: Props) {
             </button>
           </div>
 
+          <div className="flex items-center gap-1 desktop:gap-2 shrink-0">
           <TextStyleToolbar editor={editor} />
+          </div>
+          <div className="flex items-center gap-1 desktop:gap-2 shrink-0">
           <AlignToolbar editor={editor} />
+          </div>
         </div>
       </div>
 

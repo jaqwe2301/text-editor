@@ -410,7 +410,7 @@ export default function EditorTemplate() {
               "rounded-full bg-main text-white",
               "desktop:text-[15px] font-semibold",
               "shadow-default hover:shadow-md hover:-translate-y-0.5",
-              "transition-all disabled:opacity-60 disabled:hover:translate-y-0 ",
+              "transition-all disabled:opacity-60 disabled:hover:translate-y-0",
             ].join(" ")}
             onClick={onSavePost}
             disabled={isUploading}
