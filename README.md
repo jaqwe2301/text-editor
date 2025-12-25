@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# text-editor.bio ✏️  
+Tiptap + Next.js 기반 커스텀 리치 텍스트 에디터
 
-## Getting Started
+`text-editor.bio` 는 블로그 포스트처럼 **“텍스트 구조를 보존하면서 스타일링”** 하기 좋은 웹 에디터입니다.  
+Tiptap + Next.js 16 + Tailwind CSS 를 기반으로, 실제 서비스에 쓸 수 있는 수준의 툴바와 저장 로직을 구현했습니다.
 
-First, run the development server:
+> 배포 도메인: **https://text-editor.bio**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ 주요 기능
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🧰 커스텀 툴바
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **폰트 패밀리 선택**
+  - `Pretendard / Noto Sans KR / Nanum Gothic` 를 토글
+  - `font-pretendard`, `font-noto-sans-kr`, `font-nanum-gothic` 클래스를 Tiptap 마크로 관리
+- **폰트 사이즈 선택**
+  - `10, 15, 16, 19, 24, 28, 30, 34, 38px` 등 프리셋 드롭다운
+- **텍스트 스타일**
+  - 굵게 / 이텔릭 / 밑줄 / 취소선
+  - Tiptap의 `TextStyle` + 커스텀 `FontSize`, `FontFamilyClass` 확장 사용
+- **텍스트 정렬**
+  - 왼쪽 / 가운데 / 오른쪽 / 양쪽 정렬 (`TextAlign` extension)
 
-## Learn More
+### 🖼 이미지 업로드 & 드래그
 
-To learn more about Next.js, take a look at the following resources:
+- 상단 툴바의 **이미지 아이콘 클릭 → 로컬 파일 선택 → 에디터에 삽입**
+  - 에디터 위로 이미지 파일을 드래그 & 드롭하면 `FileReader` 로 `data URL` 변환 후 `insertImage` 실행
+  - 이미 삽입된 이미지를 에디터 내에서 드래그해 위치만 옮길 수 있음  
+    (`application/x-prosemirror-node` 타입 체크로 내부 드래그와 외부 파일 드롭을 구분)
+- 이미지 수 **최대 10개** 제한
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🏷 해시태그 편집기
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `#해시태그를 추가해 보세요!` 버튼으로 첫 태그 생성
+- 태그 클릭 시 인라인 편집
+  - 입력 길이에 맞게 input width 자동 조절 (숨겨진 `<span>` 으로 width 계산)
+- 포커스 아웃 시:
+  - 내용이 비어 있으면 → 해당 태그 삭제
+  - 기존 태그와 중복이면 → 중복 태그 정리
+- `+ 해시태그 추가` 버튼으로 계속 추가 가능
 
-## Deploy on Vercel
+### 📱 반응형 툴바
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **상단 고정 툴바**
+  - 에디터 스크롤과 상관없이 항상 상단에 붙어 있도록 `sticky top-0`로 구성
+  - `backdrop-blur` + 연한 배경을 사용해, 내용 위로 올라와도 시야를 가리지 않도록 처리
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **모바일 최적화**
+  - 툴바 전체를 가로 스크롤 가능하게 만들어, 작은 화면에서도 모든 기능에 접근 가능
+  - 폰트 선택 영역은 `shrink-0` / `whitespace-nowrap` 로 눌리지 않게 고정
+  - 아이콘 크기와 gap을 모바일/데스크톱에서 다르게 설정해, 한 손 조작이 편하도록 조정
+
+- **데스크톱 레이아웃**
+  - 넓은 화면에서는 툴바가 한 줄에 자연스럽게 펼쳐지도록 구성
+  - 폰트/사이즈/스타일/정렬/이미지 업로드가 한 번에 보이는 구조로, 작성 흐름을 끊지 않도록 디자인
+
+### 💾 저장 로직 (예시)
+
+- 에디터의 ProseMirror 문서를 **`EditorContentBlock[]` 구조로 변환**
+  - `text / image / link` 블럭으로 나누어 직렬화
+  - 텍스트 블럭은 `tags(strong, em, u, s)` 와 `styles(fontSize, fontFamily, color)` 를 보존
+- 이미지:
+  - 에디터에서는 우선 **base64 data URL** 로 관리
+  - 저장 시, base64 → 파일 변환 → (예: S3) 업로드 → 반환된 URL로 교체
+- `ContentRequest` 형태로 서버에 저장 API 호출
+
+---
+
+## 🧱 기술 스택
+
+- **Framework**: Next.js 16 (App Router, Turbopack)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Fonts**: `next/font/local` 로 Pretendard, Noto Sans KR, Nanum Gothic 로컬 호스팅
