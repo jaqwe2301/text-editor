@@ -1,0 +1,32 @@
+name: "✨ Feature"
+description: "신규 기능"
+title: "[Feature] "
+labels: ["feature"]
+body:
+  - type: input
+    attributes:
+      label: 기능 요약
+      placeholder: "무엇을 추가하려는지"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 배경 / 문제
+      placeholder: "왜 이 기능이 필요한가?"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 요구사항
+      placeholder: |
+        - [ ] 
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 완료 기준
+      placeholder: "이 기능이 완료되었다고 판단할 기준"

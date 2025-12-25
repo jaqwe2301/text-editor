@@ -270,7 +270,7 @@ export const CustomImage = Node.create({
         editor.view.dispatch(tr);
       });
 
-      const isMobile = window.innerWidth < 800; // 예시, 더 정교하게 감지 가능
+      const isMobile = window.innerWidth < 800;
 
       const upButton = document.createElement("button");
       const downButton = document.createElement("button");

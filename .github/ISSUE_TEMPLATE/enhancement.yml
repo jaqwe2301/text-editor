@@ -1,0 +1,28 @@
+name: "🚀 Enhancement"
+description: "기존 기능 개선"
+title: "[Enhancement] "
+labels: ["enhancement"]
+body:
+  - type: input
+    attributes:
+      label: 개선 대상
+      placeholder: "개선하려는 기능/화면"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 현재 문제점
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 개선 방향
+      placeholder: "UX / 성능 / 코드 구조 등"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 기대 효과

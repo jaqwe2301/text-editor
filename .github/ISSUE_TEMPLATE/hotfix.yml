@@ -1,0 +1,22 @@
+name: "🔥 Hotfix"
+description: "운영 중 긴급 수정"
+title: "[Hotfix] "
+labels: ["hotfix"]
+body:
+  - type: textarea
+    attributes:
+      label: 문제 상황
+      placeholder: "운영 중 어떤 문제가 발생했는지"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 영향 범위
+      placeholder: "사용자 / 기능 / 페이지"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 임시 조치 / 해결 방법

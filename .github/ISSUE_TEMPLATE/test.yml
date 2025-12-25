@@ -1,0 +1,24 @@
+name: "🧪 Test"
+description: "테스트 코드 추가/수정"
+title: "[Test] "
+labels: ["test"]
+body:
+  - type: input
+    attributes:
+      label: 테스트 대상
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 테스트 목적
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 테스트 시나리오
+      placeholder: |
+        - Given
+        - When
+        - Then

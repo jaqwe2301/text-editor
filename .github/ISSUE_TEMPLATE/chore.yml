@@ -1,0 +1,23 @@
+name: "🧹 Chore"
+description: "리팩터링, 설정, 잡일"
+title: "[Chore] "
+labels: ["chore"]
+body:
+  - type: input
+    attributes:
+      label: 작업 요약
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 작업 목록
+      placeholder: |
+        - [ ] 
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 참고 사항

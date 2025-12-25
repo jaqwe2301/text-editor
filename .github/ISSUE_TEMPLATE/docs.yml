@@ -1,0 +1,17 @@
+name: "📝 Docs"
+description: "문서, README, 가이드"
+title: "[Docs] "
+labels: ["docs"]
+body:
+  - type: input
+    attributes:
+      label: 문서 대상
+      placeholder: "README, Wiki, 가이드 등"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 수정 내용
+    validations:
+      required: true
